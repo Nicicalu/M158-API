@@ -16,8 +16,6 @@ app.app_context().push()
 
 manager = Manager(app)
 
-#test
-
 @manager.command
 def run():
     app.run(debug=False)

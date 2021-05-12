@@ -2,6 +2,7 @@ import re
 from flask import request, jsonify
 from flask_cors import CORS, logging, cross_origin
 from flask_restplus import Resource, Namespace, reqparse
+from app.main.model.DatabaseModel import databaseQuery
 
 api = Namespace('api', description='api operations')
 
@@ -22,6 +23,11 @@ class DoUser(Resource):
 class handleQuestion(Resource):
     
     def post(self):
+        databaseQuery("Select * FROM tbl_Anrede")
         username = request.json["username"]
         password = request.json["password"]
-        return "Hello World!"
+
+        print("----- Login ------")
+        print("Benutzername: "+username)
+        print("Passwort: "+password)
+        return "Login successful"
