@@ -3,17 +3,6 @@ import os
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'Test')
     DEBUG = False
-    database_connection = {
-        'user': 'XXX',
-        'password': 'XXX',
-        'host': 'XXX',
-        'database': 'XXX',
-        'raise_on_warnings': True,
-        'use_pure': False,
-        'autocommit': True,
-        'pool_size': 5
-    }
-
 
 class DevelopmentConfig(Config):
     DEBUG = True

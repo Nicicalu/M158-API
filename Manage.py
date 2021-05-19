@@ -2,19 +2,17 @@ import os
 import unittest
 
 from flask_script import Manager
-from flask_cors import CORS,logging,cross_origin
 from app import blueprint
 
 from app.main import create_app
 
 app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
-CORS(app)
 logging.getLogger('flask_cors').level = logging.DEBUG
 app.register_blueprint(blueprint)
 
 app.app_context().push()
 
-manager = Manager(app)
+manager = Manager(app) # manager erstellen
 
 @manager.command
 def run():
@@ -22,6 +20,7 @@ def run():
 
 
 @manager.command
+# Nur für testing
 def test():
     """Runs the unit tests."""
     tests = unittest.TestLoader().discover('app/test', pattern='Test*.py')
@@ -31,5 +30,5 @@ def test():
     return 1
 
 if __name__ == '__main__':
-    manager.run()
+    manager.run() # Starte den Manager
     #app.run(debug=False)
