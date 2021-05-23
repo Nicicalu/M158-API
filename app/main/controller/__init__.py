@@ -1,29 +1,19 @@
-from app.main.Config import Config
-import mysql.connector
-from mysql.connector import Error
+#from app.main.Config import Config
 from pyowm import OWM
 from pyowm.utils import config
 from pyowm.utils import timestamps
 from pyowm.utils.config import get_default_config
+import pyodbc
 
 
 try:
-    connection = mysql.connector.connect(**Config.database_connection)
-
-    if connection.is_connected():
-        db_Info = connection.get_server_info()
-        print("Connected to MySQL Server version ", db_Info)
-        cursor = connection.cursor()
-        cursor.execute("select database();")
-        record = cursor.fetchone()
-        print("Your connected to database: ", record)
+    cnxn = pyodbc.connect("Driver={ODBC Driver 17 for SQL Server};"
+                        "Server=WS2;"
+                        "Database=Noten;"
+                        "uid=Api;pwd=sml12345")
+    cursor = cnxn.cursor()
+    print("Connected to SQL Server successfully")
 
 except Error as e:
     print("Error while connecting to MySQL", e)
-    
-#finally:
-#    if connection.is_connected():
-#        cursor.close()
-#        connection.close()
-#        print("MySQL connection is closed")
         
