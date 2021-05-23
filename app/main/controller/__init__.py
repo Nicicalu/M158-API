@@ -14,6 +14,6 @@ try:
     cursor = cnxn.cursor()
     print("Connected to SQL Server successfully")
 
-except Error as e:
-    print("Error while connecting to MySQL", e)
+except:
+    print("Error while connecting to MSSQL")
         

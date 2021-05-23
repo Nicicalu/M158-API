@@ -2,11 +2,8 @@ import re
 from flask import request, jsonify
 from flask_cors import CORS, logging, cross_origin
 from flask_restplus import Resource, Namespace, reqparse
-<<<<<<< HEAD
 from app.main.model.GetModel import get
-=======
 from app.main.model.DatabaseModel import databaseQuery
->>>>>>> eec8b5f702103f47061f59e8f674d2ccf132d8b9
 
 api = Namespace('api', description='api operations')
 
@@ -31,6 +28,29 @@ class handleQuestion(Resource):
         result = jsonify(result)
         return result
 
+@api.route('/set')
+@api.doc('Route for logging in')
+@api.response(200, 'Login auth as json')
+class handleQuestion(Resource):
+    
+    def post(self):
+        table = request.json["table"]
+        data = request.json["data"]
+        
+        return result
+
+@api.route('/del')
+@api.doc('Route for logging in')
+@api.response(200, 'Login auth as json')
+class handleQuestion(Resource):
+    
+    def post(self):
+        table = request.json["table"]
+        data = request.json["data"]
+
+        return result
+
+
 # Route für Login
 @api.route('/login')
 @api.doc('Route for logging in')
@@ -46,16 +66,3 @@ class handleQuestion(Resource):
         print("Benutzername: "+username)
         print("Passwort: "+password)
         return "Login successful"
-
-# Daten aus Datenbank holen
-@api.route('/anrede')
-@api.doc('Route for getting data of "anrede"')
-@api.response(200, 'selected data')
-class handleQuestion(Resource):
-    
-    def post(self):
-        table = request.json["table"]
-
-        data = databaseQuery("Select * FROM "+table)
-
-        return str(data)
