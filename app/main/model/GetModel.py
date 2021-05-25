@@ -1,4 +1,6 @@
 from app.main.model.DatabaseModel import databaseQuery
 
 def get(table):
-    return table
+    sqlQuery = "SELECT * FROM " + table + ""
+    data = databaseQuery(sqlQuery);
+    return data

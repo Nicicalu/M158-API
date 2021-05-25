@@ -3,6 +3,7 @@ from flask import request, jsonify
 from flask_cors import CORS, logging, cross_origin
 from flask_restplus import Resource, Namespace, reqparse
 from app.main.model.GetModel import get
+from app.main.model.SetModel import add, update
 from app.main.model.DatabaseModel import databaseQuery
 
 api = Namespace('api', description='api operations')
@@ -35,8 +36,21 @@ class handleQuestion(Resource):
     
     def post(self):
         table = request.json["table"]
+        action = request.json["action"]
         data = request.json["data"]
+        data = {
+            'id': '"ABC"',
+            'name': '"ABC"'
+        }
+        if(action == "add"):
+            result = add(data, table)
+        elif (action == "update"):
+            result = update(data, table)
+        else:
+            print("Fehler! Action nicht bekannt")
+            return "Fehler! Action nicht bekannt"
         
+
         return result
 
 @api.route('/del')
