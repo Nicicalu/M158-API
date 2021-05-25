@@ -36,8 +36,8 @@ class handleQuestion(Resource):
     
     def post(self):
         table = request.json["table"]
-        action = request.json["action"]
         data = request.json["data"]
+        action = request.json["action"]
         data = {
             'id': '"ABC"',
             'name': '"ABC"'
