@@ -1,9 +1,11 @@
 import re
+import json
 from flask import request, jsonify
 from flask_cors import CORS, logging, cross_origin
 from flask_restplus import Resource, Namespace, reqparse
 from app.main.model.GetModel import get
 from app.main.model.SetModel import add, update
+from app.main.model.DelModel import delete
 from app.main.model.DatabaseModel import databaseQuery
 
 api = Namespace('api', description='api operations')
@@ -26,8 +28,8 @@ class handleQuestion(Resource):
     def post(self):
         table = request.json["table"]
         result = get(table)
-        result = jsonify(result)
-        return result
+
+        return jsonify(result)
 
 @api.route('/set')
 @api.doc('Route for logging in')
@@ -38,10 +40,7 @@ class handleQuestion(Resource):
         table = request.json["table"]
         data = request.json["data"]
         action = request.json["action"]
-        data = {
-            'id': '"ABC"',
-            'name': '"ABC"'
-        }
+
         if(action == "add"):
             result = add(data, table)
         elif (action == "update"):
@@ -61,6 +60,7 @@ class handleQuestion(Resource):
     def post(self):
         table = request.json["table"]
         data = request.json["data"]
+        result = delete(data,table)
 
         return result
 

@@ -3,7 +3,7 @@
 from flask_restplus import Api
 from flask import Blueprint
 
-from .main.controller.ApiController import api as API
+from app.main.controller.ApiController import api as API
 
 blueprint = Blueprint('api', __name__)
 

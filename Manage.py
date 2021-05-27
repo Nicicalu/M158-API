@@ -7,7 +7,6 @@ from app import blueprint
 from app.main import create_app
 
 app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
-logging.getLogger('flask_cors').level = logging.DEBUG
 app.register_blueprint(blueprint)
 
 app.app_context().push()

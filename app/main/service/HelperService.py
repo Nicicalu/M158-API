@@ -8,7 +8,7 @@ def generate_insert_query(dictionary, table):
     values = ', '.join(dictionary.values())
 
     # Generate INSERT query
-    print(f"INSERT INTO {table} ({columns}) VALUES ({values})" + "\n")
+    return (f"INSERT INTO tbl_{table} ({columns}) VALUES ({values})" + "\n")
 
 def generate_update_query(dictionary, table):
 
@@ -19,4 +19,4 @@ def generate_update_query(dictionary, table):
     values = ', '.join(dictionary.values())
 
     # Generate INSERT query
-    print(f"INSERT INTO {table} ({columns}) VALUES ({values})" + "\n")
+    return (f"INSERT INTO tbl_{table} ({columns}) VALUES ({values})" + "\n")

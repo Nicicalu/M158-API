@@ -1,8 +1,4 @@
 #from app.main.Config import Config
-from pyowm import OWM
-from pyowm.utils import config
-from pyowm.utils import timestamps
-from pyowm.utils.config import get_default_config
 import pyodbc
 
 
