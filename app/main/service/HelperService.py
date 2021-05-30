@@ -1,22 +1,22 @@
 
 def generate_insert_query(dictionary, table):
     
-    # Get all "keys" inside dictionary (column names)
+    # Alle "Keys" innerhalb des Dictionarys zusammentragen (Spalten Namen)
     columns = ', '.join(dictionary.keys())  
 
-    # Get all "values" inside of dictionary (insert values)
+    # Alle "Values" innerhalb des Dictionarys zusammentragen (Werte einfügen)
     values = ', '.join(dictionary.values())
 
-    # Generate INSERT query
+    # INSERT Query zurückgeben
     return (f"INSERT INTO tbl_{table} ({columns}) VALUES ({values})" + "\n")
 
 def generate_update_query(dictionary, table):
 
-    # Get all "keys" inside dictionary (column names)
+    # Alle "Keys" innerhalb des Dictionarys zusammentragen (Spalten Namen)
     columns = ', '.join(dictionary.keys())  
 
-    # Get all "values" inside of dictionary (insert values)
+    # Alle "Values" innerhalb des Dictionarys zusammentragen (Werte einfügen)
     values = ', '.join(dictionary.values())
 
-    # Generate INSERT query
+    # INSERT Query zurückgeben
     return (f"INSERT INTO tbl_{table} ({columns}) VALUES ({values})" + "\n")

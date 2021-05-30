@@ -21,8 +21,8 @@ class DoUser(Resource):
         return "Test successful"
 
 @api.route('/get')
-@api.doc('Route for logging in')
-@api.response(200, 'Login auth as json')
+@api.doc('Route für das Auslesen von Daten')
+@api.response(200, 'Daten als JSON')
 class handleQuestion(Resource):
     
     def post(self):
@@ -32,8 +32,8 @@ class handleQuestion(Resource):
         return jsonify(result)
 
 @api.route('/set')
-@api.doc('Route for logging in')
-@api.response(200, 'Login auth as json')
+@api.doc('Route für das Aktualisieren/Hinzufügen von Daten')
+@api.response(200, 'Die Meldung "Success", wenn es funktioniert hat')
 class handleQuestion(Resource):
     
     def post(self):
@@ -53,8 +53,8 @@ class handleQuestion(Resource):
         return result
 
 @api.route('/del')
-@api.doc('Route for logging in')
-@api.response(200, 'Login auth as json')
+@api.doc('Route für das Löschen von Daten')
+@api.response(200, 'Die Meldung "Success", wenn es funktioniert hat')
 class handleQuestion(Resource):
     
     def post(self):
