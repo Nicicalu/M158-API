@@ -6,6 +6,7 @@ from flask_restplus import Resource, Namespace, reqparse
 from app.main.model.GetModel import get
 from app.main.model.SetModel import add, update
 from app.main.model.DelModel import delete
+from app.main.model.LoginModel import login
 from app.main.model.DatabaseModel import databaseQuery
 
 api = Namespace('api', description='api operations')
@@ -74,9 +75,12 @@ class handleQuestion(Resource):
     def post(self):
         username = request.json["username"]
         password = request.json["password"]
-        databaseQuery("Select * FROM tbl_login WHERE `username` = '"+username+"' AND `password` = '"+password+"'")
-
+        
         print("----- Login ------")
         print("Benutzername: "+username)
         print("Passwort: "+password)
+        
+        result = login(username, password)
+
+
         return "Login successful"
