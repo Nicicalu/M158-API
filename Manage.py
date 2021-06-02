@@ -29,5 +29,5 @@ def test():
     return 1
 
 if __name__ == '__main__':
-    manager.run() # Starte den Manager
-    #app.run(debug=False)
+    #manager.run() # Starte den Manager
+    app.run(debug=False, host="0.0.0.0")
