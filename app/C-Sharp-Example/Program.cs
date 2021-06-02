@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
+using RestSharp;
+using Newtonsoft.Json;
+using System.Windows.Forms;
+using System.Data;
 
 namespace C_Sharp_Example
 {
@@ -12,41 +15,29 @@ namespace C_Sharp_Example
     {
         static void Main(string[] args)
         {
-            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | (SecurityProtocolType)768 | (SecurityProtocolType)3072;
-            // Create a request using a URL that can receive a post. 
-            WebRequest request = WebRequest.Create("https://127.0.0.1:5000/API/answer");
-            // Set the Method property of the request to POST.
-            request.Method = "POST";
-            // Create POST data and convert it to a byte array.
-            string postData = "{ \"question\": \"Was ist Leonardo DiCaprio\", \"properties\": { \"location\": { \"longitude\": 9.5357241, \"latitude\": 46.8663504 }, \"schuelernr\": \"59523\", \"name\": \"Nici\" } }";
-            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-            // Set the ContentType property of the WebRequest.
-            request.ContentType = "application/x-www-form-urlencoded";
-            // Set the ContentLength property of the WebRequest.
-            request.ContentLength = byteArray.Length;
-            // Get the request stream.
-            Stream dataStream = request.GetRequestStream();
-            // Write the data to the request stream.
-            dataStream.Write(byteArray, 0, byteArray.Length);
-            // Close the Stream object.
-            dataStream.Close();
-            // Get the response.
-            WebResponse response = request.GetResponse();
-            // Display the status.
-            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
-            // Get the stream containing content returned by the server.
-            dataStream = response.GetResponseStream();
-            // Open the stream using a StreamReader for easy access.
-            StreamReader reader = new StreamReader(dataStream);
-            // Read the content.
-            string responseFromServer = reader.ReadToEnd();
-            // Display the content.
-            Console.WriteLine(responseFromServer);
-            // Clean up the streams.
-            reader.Close();
-            dataStream.Close();
-            response.Close();
+            string table = "Noten";
+            var client = new RestClient("http://192.168.220.128:5000");
+            // client.Authenticator = new HttpBasicAuthenticator(username, password);
+            var request = new RestRequest("API/get");
+            request.RequestFormat = DataFormat.Json;
+
+            request.AddParameter("application/json", "{\"table\": \""+ table+"\"}", ParameterType.RequestBody);
+            var response = client.Post(request);
+            var content = response.Content; // Raw content as string
+            Console.WriteLine(content);
+
+            Application.EnableVisualStyles();
+            Form frm = new Form();  // create aForm object
+                frm.AutoSize = true;
+
+            DataGridView dataGridView = new DataGridView();
+                dataGridView.AutoSize = true;
+
+            DataTable dataTable = (DataTable)JsonConvert.DeserializeObject(content, (typeof(DataTable)));
+            dataGridView.DataSource = dataTable;
+
+            frm.Controls.Add(dataGridView);
+            frm.ShowDialog();
         }
 
     }
