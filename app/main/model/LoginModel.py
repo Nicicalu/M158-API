@@ -9,4 +9,7 @@ def login(username, password):
     # Passwort-Hash mit Datenbank vergleichen, gibt es einen User mit diesem Benutzernamen und Passwort-Hash?
     result = databaseQuery("Select * FROM tbl_login WHERE `username` = '"+username+"' AND `password` = '"+sha_password+"'")
 
-    return result
+    if(len(result) > 0):
+        return 1
+    else:
+        return 0
