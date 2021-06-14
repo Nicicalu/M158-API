@@ -1,10 +1,11 @@
 from app.main.model.DatabaseModel import databaseQuery
 
 # Funktion für das Löschen von Daten
-def delete(data, table):
-    column = list(data.keys())[0] # erste Spalte
-    value = list(data.values())[0] # erster Wert
-    sqlQuery = "DELETE FROM tbl_" + table + " WHERE "+str(column)+" = '"+str(value)+"'" #Delete Query zusammenbauen
+def delete(table):
+    #column = list(data.keys())[0] # erste Spalte
+    #value = list(data.values())[0] # erster Wert
+    #sqlQuery = "DELETE FROM tbl_" + table + " WHERE "+str(column)+" = '"+str(value)+"'" #Delete Query zusammenbauen
+    sqlQuery = "DELETE FROM tbl_" + table + " WHERE 1=1" #Delete Query zusammenbauen
     try:
         data = databaseQuery(sqlQuery) #Query ausführen
     except:

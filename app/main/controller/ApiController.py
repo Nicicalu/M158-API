@@ -4,7 +4,7 @@ from flask import request, jsonify
 from flask_cors import CORS, logging, cross_origin
 from flask_restplus import Resource, Namespace, reqparse
 from app.main.model.GetModel import get
-from app.main.model.SetModel import add, update
+from app.main.model.SetModel import add, update, insert
 from app.main.model.DelModel import delete
 from app.main.model.LoginModel import login
 from app.main.model.DatabaseModel import databaseQuery
@@ -40,17 +40,9 @@ class handleQuestion(Resource):
     def post(self):
         table = request.json["table"]
         data = request.json["data"]
-        action = request.json["action"]
 
-        if(action == "add"):
-            result = add(data, table)
-        elif (action == "update"):
-            result = update(data, table)
-        else:
-            print("Fehler! Action nicht bekannt")
-            return "Fehler! Action nicht bekannt"
+        result = insert(data, table)
         
-
         return result
 
 @api.route('/del')
@@ -60,8 +52,7 @@ class handleQuestion(Resource):
     
     def post(self):
         table = request.json["table"]
-        data = request.json["data"]
-        result = delete(data,table)
+        result = delete(table)
 
         return result
 
