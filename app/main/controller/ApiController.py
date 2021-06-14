@@ -73,5 +73,9 @@ class handleQuestion(Resource):
         
         result = login(username, password)
 
+        if(result):
+            return "Login successful"
+        else:
+            return "Login failed"
 
-        return "Login successful"
+        
