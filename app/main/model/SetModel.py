@@ -4,7 +4,10 @@ from app.main.service.HelperService import generate_insert_query, generate_updat
 # Funktion für das Hinzufügen von Daten
 def insert(data, table):
     query = generate_insert_query(data, table) # Query generieren lassen
-    result = databaseQuery(query) #Query ausführen
+    if(table == "Benutzer"):
+        result = databaseQuery(query) #Query ausführen
+    else:
+        result = databaseQuery("SET IDENTITY_INSERT tbl_"+table+" ON;"+query+"; SET IDENTITY_INSERT tbl_"+table+" OFF;") #Query ausführen
     return result
 
 # Funktion für das Hinzufügen von Daten
